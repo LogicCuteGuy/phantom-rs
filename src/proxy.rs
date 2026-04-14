@@ -337,9 +337,6 @@ fn bind_reusable_socket(addr: &str, with_timeout: bool, v6_only: bool) -> io::Re
     let socket = Socket::new(domain, Type::DGRAM, Some(Protocol::UDP))?;
     socket.set_reuse_address(true)?;
 
-    #[cfg(unix)]
-    socket.set_reuse_port(true)?;
-
     if socket_addr.is_ipv6() {
         socket.set_only_v6(v6_only)?;
     }
