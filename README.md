@@ -43,6 +43,41 @@ Options:
 	-6, --ipv6                Optional: Enable IPv6 support on port 19133 (experimental)
 	--remove_ports            Optional: Remove ports from pong packets (experimental)
 	--workers <WORKERS>       Optional: Number of worker listeners (default: 1)
+	--server_protocol <SERVER_PROTOCOL>
+	                          Optional: Upstream server protocol for 7551 discovery transport
+	                          values: raknet | nethernet (default: raknet)
+	--relay <RELAY>           Optional: Relay WebSocket URL (example: ws://127.0.0.1:8080)
+	--room <ROOM>             Optional: Relay room name (default: bedrock1)
+	--relay_role <ROLE>       Optional: Relay mode: host | player
+	--direct_relay            Optional: Shortcut for relay host mode (no local bind proxy)
+```
+
+Bind/client-facing discovery is currently RakNet-only.
+
+Relay examples:
+
+- Relay host mode (equivalent to app_host.js):
+
+```bash
+cargo run -- --relay ws://127.0.0.1:8080 --room bedrock1 --relay_role host --server 127.0.0.1:19132
+```
+
+- Relay player mode (equivalent to app_player.js):
+
+```bash
+cargo run -- --relay ws://127.0.0.1:8080 --room bedrock1 --relay_role player --bind_port 19132
+```
+
+- Direct relay shortcut (host mode, no local bind proxy):
+
+```bash
+cargo run -- --direct_relay --relay ws://127.0.0.1:8080 --room bedrock1 --server 127.0.0.1:19132
+```
+
+- Relay host with NetherNet upstream (query 7551 and answer RakNet MOTD to players):
+
+```bash
+cargo run -- --relay ws://127.0.0.1:8080 --room bedrock1 --relay_role host --server 127.0.0.1:17551 --server_protocol nethernet
 ```
 
 **Example**

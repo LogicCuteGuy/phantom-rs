@@ -12,9 +12,16 @@ name = "phantom-rs"
 path = "src/main.rs"
 
 [dependencies]
+bytes = "1"
 clap = { version = "4.5", features = ["derive"] }
 ctrlc = "3.4"
 env_logger = "0.11"
+futures-util = "0.3"
 log = "0.4"
 rand = "0.10.1"
 socket2 = "0.6.3"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "sync"] }
+tokio-tungstenite = { version = "0.23", default-features = false, features = ["connect", "handshake"] }
+tokio-nethernet = { git = "https://github.com/LogicCuteGuy/axolotl-stack.git", package = "tokio-nethernet", features = ["discovery"] }
+tokio-raknet = { git = "https://github.com/LogicCuteGuy/axolotl-stack.git", package = "tokio-raknet" }
+hex = "0.4"
